@@ -1,6 +1,7 @@
 // DEPENDENCCIES
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 let controller = require("./controllers/controller");
 
@@ -8,13 +9,17 @@ let controller = require("./controllers/controller");
 const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cors());
 
 // ROUTES
 app.use("/transactions", controller);
 
-app.get("/transactions", (req, res) => {
-  console.log("Here");
+app.get("/", (req, res) => {
   res.send(transactions);
+});
+
+app.use("*", (req, res) => {
+  res.status(404).send("Sorry, no page found");
 });
 
 // EXPORT
