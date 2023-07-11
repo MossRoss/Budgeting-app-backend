@@ -15,7 +15,7 @@ app.use(cors());
 app.use("/transactions", controller);
 
 app.get("/", (req, res) => {
-  res.send(transactions);
+  res.send("Hello");
 });
 
 app.use("*", (req, res) => {
